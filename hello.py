@@ -15,8 +15,5 @@ def login():
 
 @app.route('/post_json', methods=['POST'])
 def post_json():
-    if request.method == 'POST':
-        json_data = request.get_json()
-        return {'key1': json_data['key1'], 'key2': json_data['key2']}
-    else:
-        return 'not post'
+    json_data = request.get_json()
+    return {'key1': json_data['key1'], 'key2': json_data['key2']}

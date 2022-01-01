@@ -22,3 +22,18 @@ FLASK_APP=hello FLASK_ENV=development flask run
 # 本番環境向けにGunicornというサーバーソフトで実行する場合
 gunicorn hello:app
 ```
+
+HTTPSでの実行には以下を行う。
+```
+mkdir secret
+cd secred
+
+# 自己署名鍵の作成
+openssl genrsa 2048 > server.key
+openssl req -new -key server.key > server.csr   # 色々入力を求められるが何も入力しなかった
+openssl x509 -days 3650 -req -signkey server.key < server.csr > server.crt
+
+# 作成した鍵を使って実行
+cd ..
+gunicorn hello:app --keyfile secret/server.key --certfile secret/server.crt
+```

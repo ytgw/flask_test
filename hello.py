@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any
 from flask import Flask, request, abort
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def login():
         return 'login get'
 
 @app.route('/post_json', methods=['POST'])  # type:ignore
-def post_json() -> Dict[str, Any]:
+def post_json() -> dict[str, Any]:
     json_data = request.get_json()
     if json_data is None:
         abort(400)
